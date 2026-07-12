@@ -1,4 +1,4 @@
-const STATUSES = ['未対応', '対応中', '完了'];
+const STATUSES = ['未対応', '対応中', 'レビュー中', '完了'];
 
 const form = document.getElementById('inquiry-form');
 const formErrors = document.getElementById('form-errors');

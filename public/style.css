@@ -180,6 +180,12 @@ select.status[data-status="対応中"] {
   color: #8a6d00;
 }
 
+select.status[data-status="レビュー中"] {
+  background: #e3f2fd;
+  border-color: #90caf9;
+  color: #0d47a1;
+}
+
 select.status[data-status="完了"] {
   background: #e8f5e9;
   border-color: #a5d6a7;

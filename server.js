@@ -6,7 +6,7 @@ const PORT = 3000;
 const DB_PATH = path.join(__dirname, 'data', 'db.json');
 const PUBLIC_DIR = path.join(__dirname, 'public');
 
-const STATUSES = ['未対応', '対応中', '完了'];
+const STATUSES = ['未対応', '対応中', 'レビュー中', '完了'];
 
 const SEED = {
   nextId: 4,
@@ -154,7 +154,7 @@ const server = http.createServer(async (req, res) => {
       return;
     }
     if (!STATUSES.includes(body.status)) {
-      sendJson(res, 422, { errors: ['ステータスは 未対応 / 対応中 / 完了 のいずれかを指定してください'] });
+      sendJson(res, 422, { errors: ['ステータスは 未対応 / 対応中 / レビュー中 / 完了 のいずれかを指定してください'] });
       return;
     }
     const db = loadDb();
