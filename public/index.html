@@ -1,0 +1,51 @@
+<!DOCTYPE html>
+<html lang="ja">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>お問い合わせ管理</title>
+  <link rel="stylesheet" href="/style.css">
+</head>
+<body>
+  <header>
+    <h1>お問い合わせ管理</h1>
+  </header>
+
+  <main>
+    <section class="card">
+      <h2>新規登録</h2>
+      <form id="inquiry-form">
+        <div class="field">
+          <label for="name">名前</label>
+          <input type="text" id="name" name="name" placeholder="例: 山田 太郎" autocomplete="off">
+        </div>
+        <div class="field">
+          <label for="content">内容</label>
+          <textarea id="content" name="content" rows="3" placeholder="お問い合わせ内容を入力してください"></textarea>
+        </div>
+        <div id="form-errors" class="errors" hidden></div>
+        <button type="submit">登録する</button>
+      </form>
+    </section>
+
+    <section class="card">
+      <h2>お問い合わせ一覧</h2>
+      <div id="list-empty" class="empty" hidden>お問い合わせはまだありません。</div>
+      <table id="inquiry-table" hidden>
+        <thead>
+          <tr>
+            <th>受付番号</th>
+            <th>名前</th>
+            <th>内容</th>
+            <th>受付日時</th>
+            <th>ステータス</th>
+          </tr>
+        </thead>
+        <tbody id="inquiry-list"></tbody>
+      </table>
+    </section>
+  </main>
+
+  <script src="/app.js"></script>
+</body>
+</html>
