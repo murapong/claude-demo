@@ -30,6 +30,15 @@
 
     <section class="card">
       <h2>お問い合わせ一覧</h2>
+      <div class="filter">
+        <label for="status-filter">ステータスで絞り込み</label>
+        <select id="status-filter">
+          <option value="">すべて</option>
+          <option value="未対応">未対応</option>
+          <option value="対応中">対応中</option>
+          <option value="完了">完了</option>
+        </select>
+      </div>
       <div id="list-empty" class="empty" hidden>お問い合わせはまだありません。</div>
       <table id="inquiry-table" hidden>
         <thead>

@@ -5,6 +5,9 @@ const formErrors = document.getElementById('form-errors');
 const table = document.getElementById('inquiry-table');
 const listBody = document.getElementById('inquiry-list');
 const listEmpty = document.getElementById('list-empty');
+const statusFilter = document.getElementById('status-filter');
+
+let allInquiries = [];
 
 function formatDate(iso) {
   const d = new Date(iso);
@@ -65,15 +68,26 @@ function renderRow(inquiry) {
   return tr;
 }
 
-async function loadInquiries() {
-  const res = await fetch('/api/inquiries');
-  const inquiries = await res.json();
+function renderList() {
+  const filter = statusFilter.value;
+  const inquiries = filter
+    ? allInquiries.filter((i) => i.status === filter)
+    : allInquiries;
   listBody.innerHTML = '';
   for (const inquiry of inquiries) {
     listBody.appendChild(renderRow(inquiry));
   }
   table.hidden = inquiries.length === 0;
   listEmpty.hidden = inquiries.length > 0;
+  listEmpty.textContent = filter && allInquiries.length > 0
+    ? '該当するお問い合わせはありません。'
+    : 'お問い合わせはまだありません。';
+}
+
+async function loadInquiries() {
+  const res = await fetch('/api/inquiries');
+  allInquiries = await res.json();
+  renderList();
 }
 
 async function updateStatus(id, select) {
@@ -89,6 +103,11 @@ async function updateStatus(id, select) {
     return;
   }
   select.dataset.status = select.value;
+  const inquiry = allInquiries.find((i) => i.id === id);
+  if (inquiry) inquiry.status = select.value;
+  if (statusFilter.value && statusFilter.value !== select.value) {
+    renderList();
+  }
 }
 
 form.addEventListener('submit', async (e) => {
@@ -114,5 +133,7 @@ form.addEventListener('submit', async (e) => {
   form.reset();
   await loadInquiries();
 });
+
+statusFilter.addEventListener('change', renderList);
 
 loadInquiries();
