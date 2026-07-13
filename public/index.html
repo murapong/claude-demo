@@ -1,0 +1,49 @@
+<!DOCTYPE html>
+<html lang="ja">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>お問い合わせ管理</title>
+  <link rel="stylesheet" href="/style.css">
+</head>
+<body>
+  <header class="site-header">
+    <h1>お問い合わせ管理</h1>
+  </header>
+
+  <main class="container">
+    <section class="panel">
+      <h2>新規登録</h2>
+      <form id="inquiry-form" novalidate>
+        <div class="field">
+          <label for="name">名前 <span class="required">必須</span></label>
+          <input type="text" id="name" name="name" maxlength="100" placeholder="例: 山田 太郎" autocomplete="name">
+        </div>
+        <div class="field">
+          <label for="content">お問い合わせ内容 <span class="required">必須</span></label>
+          <textarea id="content" name="content" rows="4" maxlength="2000" placeholder="お問い合わせの内容を入力してください"></textarea>
+        </div>
+        <div id="form-errors" class="form-errors" hidden></div>
+        <button type="submit" class="btn-primary">登録する</button>
+      </form>
+    </section>
+
+    <section class="panel">
+      <div class="list-header">
+        <h2>お問い合わせ一覧</h2>
+        <div class="filter" role="group" aria-label="ステータスで絞り込み">
+          <button type="button" class="filter-btn is-active" data-filter="すべて">すべて</button>
+          <button type="button" class="filter-btn" data-filter="未対応">未対応</button>
+          <button type="button" class="filter-btn" data-filter="対応中">対応中</button>
+          <button type="button" class="filter-btn" data-filter="完了">完了</button>
+          <button type="button" class="filter-btn" data-filter="却下">却下</button>
+        </div>
+      </div>
+      <ul id="inquiry-list" class="inquiry-list"></ul>
+      <p id="empty-message" class="empty-message" hidden>該当するお問い合わせはありません。</p>
+    </section>
+  </main>
+
+  <script src="/app.js"></script>
+</body>
+</html>
