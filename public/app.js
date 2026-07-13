@@ -7,6 +7,16 @@ const formErrors = document.getElementById('form-errors');
 const listEl = document.getElementById('inquiry-list');
 const emptyMessage = document.getElementById('empty-message');
 const filterButtons = document.querySelectorAll('.filter-btn');
+const toast = document.getElementById('toast');
+
+let toastTimer;
+
+function showToast(message) {
+  toast.textContent = message;
+  toast.classList.add('is-visible');
+  clearTimeout(toastTimer);
+  toastTimer = setTimeout(() => toast.classList.remove('is-visible'), 3000);
+}
 
 let inquiries = [];
 let currentFilter = 'すべて';
@@ -140,6 +150,7 @@ form.addEventListener('submit', async (event) => {
     if (!res.ok) throw new Error();
     form.reset();
     await fetchInquiries();
+    showToast(`お問い合わせを登録しました(受付番号: ${data.inquiry.receiptNumber})`);
   } catch {
     showErrors(['登録に失敗しました。時間をおいて再度お試しください。']);
   } finally {
